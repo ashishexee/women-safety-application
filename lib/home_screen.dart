@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:woman_safety_app/home_widget/custom_appbar.dart';
 import 'package:woman_safety_app/home_widget/custom_carouel.dart';
 import 'package:woman_safety_app/home_widget/emergency.dart';
+import 'package:woman_safety_app/home_widget/livesafe.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -62,7 +63,32 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-              Emergency(), // custom carouel ,,,,, // whenever this slide change is called for it will get a random
+              Emergency(),
+              Center(
+                child: ShaderMask(
+                  shaderCallback:
+                      (bounds) => LinearGradient(
+                        colors: [Colors.red, Colors.orange],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ).createShader(bounds),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "Explore Livesafe",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color:
+                            Colors
+                                .white, // This color is overridden by the gradient
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Livesafe(),
+              // custom carouel ,,,,, // whenever this slide change is called for it will get a random
             ],
           ),
         ),

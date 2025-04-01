@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PoliceEmegency extends StatelessWidget {
   const PoliceEmegency({super.key});
@@ -11,6 +12,10 @@ class PoliceEmegency extends StatelessWidget {
         elevation: 8.0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         child: InkWell(
+          onTap: () async {
+            final Uri url = Uri(scheme: 'tel', path: '112');
+            await launchUrl(url);
+          },
           child: Container(
             height: 250, // Increased height from 200 to 250
             width: MediaQuery.of(context).size.width * 0.7,
@@ -81,6 +86,10 @@ class AmbulancEmegency extends StatelessWidget {
         elevation: 8.0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         child: InkWell(
+          onTap: () async {
+            final Uri url = Uri(scheme: 'tel', path: '112');
+            await launchUrl(url);
+          },
           child: Container(
             height: 250, // Increased height from 200 to 250
             width: MediaQuery.of(context).size.width * 0.7,
@@ -151,6 +160,10 @@ class FlameEmegency extends StatelessWidget {
         elevation: 8.0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         child: InkWell(
+          onTap: () async {
+            final Uri url = Uri(scheme: 'tel', path: '112');
+            await launchUrl(url);
+          },
           child: Container(
             height: 250, // Increased height from 200 to 250
             width: MediaQuery.of(context).size.width * 0.7,
