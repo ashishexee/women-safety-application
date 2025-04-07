@@ -1,10 +1,10 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:woman_safety_app/home_widget/custom_appbar.dart';
 import 'package:woman_safety_app/home_widget/custom_carouel.dart';
 import 'package:woman_safety_app/home_widget/emergency.dart';
 import 'package:woman_safety_app/home_widget/livesafe.dart';
+import 'package:woman_safety_app/safehome/SafeHome.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -88,6 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               Livesafe(),
+              Safehome(),
               // custom carouel ,,,,, // whenever this slide change is called for it will get a random
             ],
           ),
