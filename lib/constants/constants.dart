@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 const themecolor = Color(0xFFfc4572);
 void gotopush(BuildContext context, Widget nextscreen) {
@@ -127,4 +128,15 @@ void snackbarerror(BuildContext context, String error) {
   );
 
   ScaffoldMessenger.of(context).showSnackBar(snackBar);
+}
+
+void showFlutterToast(String message) {
+  Fluttertoast.showToast(
+    msg: message,
+    toastLength: Toast.LENGTH_SHORT,
+    gravity: ToastGravity.BOTTOM,
+    backgroundColor: themecolor,
+    textColor: Colors.white,
+    fontSize: 16.0,
+  );
 }
