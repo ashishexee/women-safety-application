@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:woman_safety_app/child/bottom_page.dart';
 import 'package:woman_safety_app/components/custom_textfield.dart';
 import 'package:woman_safety_app/components/primary_button.dart';
 import 'package:woman_safety_app/components/secondary_buttons.dart';
 import 'package:woman_safety_app/constants/constants.dart';
 import 'package:woman_safety_app/db/shared_pref.dart';
-import 'package:woman_safety_app/child/bottom_pages.dart/home_screen.dart';
 import 'package:woman_safety_app/child/register_page_child.dart';
 import 'package:woman_safety_app/parents/parents_home_screen.dart';
 import 'package:woman_safety_app/parents/register_page_parent.dart';
@@ -44,16 +44,15 @@ class _LoginPageState extends State<LoginPage> {
                 final userType = value.data()?['type'];
                 if (userType == 'parent') {
                   SharedPref.saveUser('parent');
-                  Navigator.of(context).pushAndRemoveUntil(
+                  Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => ParentsHomeScreen(),
                     ),
-                    (route) => false,
                   );
                 } else if (userType == 'child') {
                   SharedPref.saveUser('child');
                   Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (context) => HomeScreen()),
+                    MaterialPageRoute(builder: (context) => BottomPage()),
                     (route) => false,
                   );
                 } else {
