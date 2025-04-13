@@ -2,15 +2,22 @@ class Usermodal {
   String? name;
   String? phone;
   String? id;
-  String? email;
+  String? childEmail;
   String? parentsEmail;
   String? type;
-  Usermodal({this.name, this.phone, this.id, this.email, this.parentsEmail,this.type});
+  Usermodal({
+    this.name,
+    this.phone,
+    this.id,
+    this.childEmail,
+    this.parentsEmail,
+    this.type,
+  });
   Map<String, dynamic> tojson() => {
     'name': name,
     'phone': phone,
     'id': id,
-    'email': email,
+    'childEmail': childEmail,
     'parentEmail': parentsEmail,
     'type': type,
   };
