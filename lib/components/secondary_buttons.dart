@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:woman_safety_app/components/custom_textfield.dart';
+import 'package:woman_safety_app/constants/constants.dart';
 
 class SecondaryButton extends StatelessWidget {
   final String title;
