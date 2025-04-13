@@ -37,7 +37,7 @@ class _RegisterPageParentState extends State<RegisterPageParent> {
         FirebaseAuth auth = FirebaseAuth.instance;
         auth
             .createUserWithEmailAndPassword(
-              email: _formdata['email'].toString(),
+              email: _formdata['parent_email'].toString(),
               password: _formdata['password'].toString(),
             )
             // there are mainly 2 main operations where you can use WHEN and THEN
@@ -50,8 +50,8 @@ class _RegisterPageParentState extends State<RegisterPageParent> {
                 name: _formdata['name'].toString(),
                 phone: _formdata['phone'].toString(),
                 id: v.user!.uid,
-                email: _formdata['email'].toString(),
-                parentsEmail: _formdata['guardian_email'].toString(),
+                childEmail: _formdata['child_email'].toString(),
+                parentsEmail: _formdata['parent_email'].toString(),
                 type: 'parent',
               );
               final jsonData = user.tojson();
@@ -82,7 +82,7 @@ class _RegisterPageParentState extends State<RegisterPageParent> {
         });
       }
     }
-    print(_formdata['email']);
+    print(_formdata['parent_email']);
     print(_formdata['password']);
   }
 
@@ -179,7 +179,7 @@ class _RegisterPageParentState extends State<RegisterPageParent> {
                     ispassword: false,
                     keyboardtypee: TextInputType.emailAddress,
                     onsave: (email) {
-                      _formdata['email'] = email ?? " ";
+                      _formdata['parent_email'] = email ?? " ";
                     },
                     validate: (email) {
                       if (email!.isEmpty) {
