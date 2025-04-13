@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:woman_safety_app/constants/constants.dart';
 
 class CustomTextfield extends StatelessWidget {
   final String? hinttext;
@@ -66,5 +67,3 @@ class CustomTextfield extends StatelessWidget {
     );
   }
 }
-
-const themecolor = Color(0xFFfc4572);
