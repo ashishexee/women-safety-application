@@ -50,7 +50,7 @@ class _RegisterPageChildState extends State<RegisterPageChild> {
                 name: _formdata['name'].toString(),
                 phone: _formdata['phone'].toString(),
                 id: v.user!.uid,
-                email: _formdata['email'].toString(),
+                childEmail: _formdata['email'].toString(),
                 parentsEmail: _formdata['guardian_email'].toString(),
                 type: 'child',
               );
