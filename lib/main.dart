@@ -3,6 +3,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:woman_safety_app/child/bottom_page.dart';
 import 'package:woman_safety_app/constants/constants.dart';
 import 'package:woman_safety_app/db/shared_pref.dart';
 import 'package:woman_safety_app/child/bottom_pages.dart/home_screen.dart';
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
             return Center(child: CircularProgressIndicator());
           } else {
             if (snapshot.data == 'child') {
-              return HomeScreen();
+              return BottomPage();
             } else if (snapshot.data == 'parent') {
               return ParentsHomeScreen();
             } else {
