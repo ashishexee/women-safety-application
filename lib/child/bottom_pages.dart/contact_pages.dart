@@ -171,7 +171,25 @@ class _ContactPagesState extends State<ContactPages> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Contacts', style: TextStyle(color: themecolor)),
+        title: ShaderMask(
+          shaderCallback:
+              (bounds) => LinearGradient(
+                colors: [Colors.blue, Colors.purple],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ).createShader(bounds),
+          child: const Text(
+            'Contacts',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 24,
+              letterSpacing: 1.2,
+            ),
+          ),
+        ),
+        backgroundColor: Colors.white,
+        elevation: 2,
         actions: [
           IconButton(
             onPressed: _isLoading ? null : _fetchContacts,
@@ -181,39 +199,39 @@ class _ContactPagesState extends State<ContactPages> {
                       width: 24,
                       height: 24,
                       child: CircularProgressIndicator(
-                        color: Colors.white,
+                        color: Colors.blue,
                         strokeWidth: 2,
                       ),
                     )
-                    : const Icon(Icons.refresh),
+                    : const Icon(Icons.refresh, color: Colors.blue),
+            tooltip: 'Refresh',
           ),
         ],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(60),
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              controller: _searchController,
-              decoration: InputDecoration(
-                hintText: 'Search contacts...',
-                prefixIcon: const Icon(Icons.search, color: themecolor),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
+            padding: const EdgeInsets.all(12.0),
+            child: Material(
+              elevation: 2,
+              borderRadius: BorderRadius.circular(12),
+              child: TextField(
+                controller: _searchController,
+                decoration: InputDecoration(
+                  hintText: 'Search contacts...',
+                  prefixIcon: const Icon(Icons.search, color: Colors.blue),
+                  border: InputBorder.none,
+                  contentPadding: const EdgeInsets.symmetric(vertical: 14),
+                  suffixIcon:
+                      _searchController.text.isNotEmpty
+                          ? IconButton(
+                            icon: const Icon(Icons.clear, color: Colors.grey),
+                            onPressed: () {
+                              _searchController.clear();
+                              _filterContacts();
+                            },
+                          )
+                          : null,
                 ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide(color: themecolor, width: 2),
-                ),
-                suffixIcon:
-                    _searchController.text.isNotEmpty
-                        ? IconButton(
-                          icon: const Icon(Icons.clear),
-                          onPressed: () {
-                            _searchController.clear();
-                            _filterContacts();
-                          },
-                        )
-                        : null,
               ),
             ),
           ),
@@ -224,44 +242,82 @@ class _ContactPagesState extends State<ContactPages> {
             _isLoading
                 ? const Center(child: CircularProgressIndicator.adaptive())
                 : _filteredContacts.isEmpty
-                ? const Center(child: Text('No contacts found'))
+                ? Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.contact_page, size: 80, color: Colors.grey[300]),
+                    const SizedBox(height: 16),
+                    const Text(
+                      'No contacts found',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                )
                 : ListView.builder(
                   itemCount: _filteredContacts.length,
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 10,
+                    horizontal: 8,
+                  ),
                   itemBuilder: (context, index) {
                     Contact contact = _filteredContacts[index];
                     final List<Phone> phones = contact.phones;
                     return Card(
                       margin: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 5,
+                        vertical: 8,
+                        horizontal: 4,
+                      ),
+                      elevation: 3,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
                       ),
                       child: ListTile(
+                        contentPadding: const EdgeInsets.symmetric(
+                          vertical: 10,
+                          horizontal: 16,
+                        ),
                         leading: CircleAvatar(
-                          backgroundColor: const Color.fromARGB(
-                            255,
-                            195,
-                            226,
-                            251,
+                          radius: 26,
+                          backgroundColor: Colors.blue.shade100,
+                          child: Icon(
+                            Icons.person,
+                            color: Colors.blue.shade700,
+                            size: 28,
                           ),
-                          child: const Icon(Icons.person, color: Colors.blue),
                         ),
                         title: Text(
                           contact.displayName,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
-                            foreground:
-                                Paint()
-                                  ..shader = LinearGradient(
-                                    colors: <Color>[Colors.blue, Colors.purple],
-                                  ).createShader(
-                                    const Rect.fromLTWH(0.0, 0.0, 200.0, 70.0),
-                                  ),
+                            fontSize: 17,
+                            color: Colors.black87,
+                            letterSpacing: 0.5,
                           ),
                         ),
-                        subtitle: Text(
-                          phones.isNotEmpty
-                              ? phones[0].number
-                              : 'No phone number',
+                        subtitle: Padding(
+                          padding: const EdgeInsets.only(top: 4.0),
+                          child: Text(
+                            phones.isNotEmpty
+                                ? phones[0].number
+                                : 'No phone number',
+                            style: TextStyle(
+                              color:
+                                  phones.isNotEmpty
+                                      ? Colors.grey[700]
+                                      : Colors.redAccent,
+                              fontWeight:
+                                  phones.isNotEmpty
+                                      ? FontWeight.w500
+                                      : FontWeight.w400,
+                            ),
+                          ),
+                        ),
+                        trailing: Icon(
+                          Icons.chevron_right,
+                          color: Colors.grey[400],
                         ),
                         onTap: () {
                           if (contact.phones.isNotEmpty) {
@@ -291,6 +347,9 @@ class _ContactPagesState extends State<ContactPages> {
         onPressed: _isLoading ? null : _fetchContacts,
         icon: const Icon(Icons.refresh),
         label: const Text('Refresh'),
+        backgroundColor: Colors.blue,
+        foregroundColor: Colors.white,
+        elevation: 2,
       ),
     );
   }
