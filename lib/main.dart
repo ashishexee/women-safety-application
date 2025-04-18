@@ -13,7 +13,7 @@ import 'package:woman_safety_app/parents/parents_home_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  await SharedPref.init(); // Initialize SharedPreferences
+  await SharedPref.init();
   runApp(const MyApp());
 }
 
