@@ -8,6 +8,7 @@ import 'package:woman_safety_app/components/secondary_buttons.dart';
 import 'package:woman_safety_app/constants/constants.dart';
 import 'package:woman_safety_app/db/shared_pref.dart';
 import 'package:woman_safety_app/child/register_page_child.dart';
+import 'package:woman_safety_app/forgot_password.dart';
 import 'package:woman_safety_app/parents/parents_home_screen.dart';
 import 'package:woman_safety_app/parents/register_page_parent.dart';
 
@@ -108,13 +109,28 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const SizedBox(height: 20),
-                      Text(
-                        'USER LOGIN',
-                        style: TextStyle(
-                          fontSize: 40,
-                          fontWeight: FontWeight.bold,
-                          color: const Color(0xFFfc4572),
+                      ShaderMask(
+                        shaderCallback:
+                            (bounds) => LinearGradient(
+                              colors: [Colors.orange, Colors.red],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            ).createShader(bounds),
+                        child: Text(
+                          "LOGIN",
+                          style: TextStyle(
+                            fontSize: 64,
+                            fontWeight: FontWeight.w900,
+                            letterSpacing: 2.0,
+                            color: Colors.white,
+                            shadows: [
+                              Shadow(
+                                offset: Offset(2, 2),
+                                blurRadius: 4,
+                                color: Colors.red,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -205,6 +221,7 @@ class _LoginPageState extends State<LoginPage> {
                         title: 'Forgot Password? Click Here',
                         onPressed: () {
                           // Navigate to forgot password page
+                          gotopush(context, ForgotPasswordPage());
                         },
                       ),
                       const SizedBox(height: 20),
