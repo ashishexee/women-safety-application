@@ -21,7 +21,7 @@ class _AddContactsState extends State<AddContacts> {
 
   Future<void> showList() async {
     try {
-    await _databasehelper.getdb();
+      await _databasehelper.getdb();
       List<TContact> contacts = await _databasehelper.getContactList();
 
       if (mounted) {
@@ -45,36 +45,33 @@ class _AddContactsState extends State<AddContacts> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          elevation: 2,
+          centerTitle: true,
+          backgroundColor: Colors.transparent,
+          title: ShaderMask(
+            shaderCallback:
+                (bounds) => LinearGradient(
+                  colors: [themecolor, Colors.orange],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ).createShader(bounds),
+            blendMode: BlendMode.srcIn,
+            child: const Text(
+              'Trusted Contacts',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 22,
+                letterSpacing: 1.1,
+              ),
+            ),
+          ),
+        ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 10,
-                  horizontal: 16,
-                ),
-                decoration: BoxDecoration(
-                  color: themecolor.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'ENTER YOUR TRUSTED CONTACTS',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: themecolor,
-                      ),
-                    ),
-                    Icon(Icons.person_add, color: themecolor, size: 28),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -88,22 +85,25 @@ class _AddContactsState extends State<AddContacts> {
                           ),
                         );
                         if (result == true) {
-                          // Ensure database is updated and UI refreshes
                           await showList();
                         }
                       },
                     ),
                   ),
-                  const SizedBox(width: 10),
+                  const SizedBox(width: 12),
                   Container(
                     decoration: BoxDecoration(
-                      color: themecolor,
+                      gradient: LinearGradient(
+                        colors: [themecolor, Colors.orange],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
                       shape: BoxShape.circle,
                       boxShadow: [
                         BoxShadow(
-                          color: themecolor.withOpacity(0.4),
-                          blurRadius: 6,
-                          offset: const Offset(0, 3),
+                          color: themecolor.withOpacity(0.25),
+                          blurRadius: 8,
+                          offset: const Offset(0, 4),
                         ),
                       ],
                     ),
@@ -116,7 +116,6 @@ class _AddContactsState extends State<AddContacts> {
                           ),
                         );
                         if (result == true) {
-                          // Ensure database is updated and UI refreshes
                           await showList();
                         }
                       },
@@ -124,17 +123,29 @@ class _AddContactsState extends State<AddContacts> {
                   ),
                 ],
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 22),
               Expanded(
                 child:
                     count == 0
                         ? Center(
-                          child: Text(
-                            'No contacts added yet.',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.grey[600],
-                            ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.contact_page,
+                                size: 80,
+                                color: Colors.grey[300],
+                              ),
+                              const SizedBox(height: 16),
+                              const Text(
+                                'No contacts added yet.',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.black54,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
                           ),
                         )
                         : ListView.builder(
@@ -144,54 +155,65 @@ class _AddContactsState extends State<AddContacts> {
                               elevation: 4,
                               margin: const EdgeInsets.symmetric(
                                 vertical: 8,
-                                horizontal: 4,
+                                horizontal: 2,
                               ),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
+                                borderRadius: BorderRadius.circular(14),
                               ),
                               child: ListTile(
                                 leading: CircleAvatar(
                                   backgroundColor: themecolor,
+                                  radius: 25,
                                   child: Text(
                                     contactsList[index].name[0].toUpperCase(),
-                                    style: const TextStyle(color: Colors.white),
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                    ),
                                   ),
                                 ),
                                 title: Text(
                                   contactsList[index].name,
                                   style: const TextStyle(
                                     fontWeight: FontWeight.bold,
+                                    fontSize: 17,
+                                    color: Colors.black87,
                                   ),
                                 ),
-                                subtitle: Text(
-                                  contactsList[index].number,
-                                  style: TextStyle(color: Colors.grey[700]),
+                                subtitle: Padding(
+                                  padding: const EdgeInsets.only(top: 2.0),
+                                  child: Text(
+                                    contactsList[index].number,
+                                    style: TextStyle(
+                                      color: Colors.grey[700],
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 15,
+                                    ),
+                                  ),
                                 ),
                                 trailing: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     IconButton(
-                                      icon: const Icon(
+                                      icon: Icon(
                                         Icons.call,
-                                        color: themecolor,
+                                        color: Colors.green[700],
                                       ),
                                       onPressed: () {
-                                        // Add call functionality here
                                         final phoneNumber =
                                             contactsList[index].number;
-                                        // Use a package like url_launcher to make the call
                                         launchUrl(
                                           Uri.parse('tel:$phoneNumber'),
                                         );
                                       },
                                     ),
                                     IconButton(
-                                      icon: const Icon(
+                                      icon: Icon(
                                         Icons.delete,
-                                        color: themecolor,
+                                        color: Colors.red[400],
                                       ),
                                       onPressed: () {
-                                        // Add delete functionality here
                                         deletecontacts(contactsList, index);
                                       },
                                     ),
@@ -212,7 +234,6 @@ class _AddContactsState extends State<AddContacts> {
   void deletecontacts(List<TContact> contactList, int index) async {
     int id = contactList[index].id;
     await _databasehelper.deletecontacts(id);
-    // Remove the contact with a fade-out animation
     setState(() {
       contactsList.removeAt(index);
       count = contactsList.length;
@@ -227,9 +248,7 @@ class _AddContactsState extends State<AddContacts> {
       fontSize: 16.0,
     );
 
-    // Delay to allow the animation to complete before refreshing the list
     await Future.delayed(const Duration(milliseconds: 300));
-
     List<TContact> newcontactsList = await _databasehelper.getContactList();
     setState(() {
       contactsList = newcontactsList;
