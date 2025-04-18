@@ -67,10 +67,11 @@ class _SafehomeState extends State<Safehome> {
 
   _getaddresslocation() async {
     try {
-      if (_currentPosition == null) {
-        showFlutterToast("Current position is not available.");
-        return;
-      }
+       Future.delayed(Duration(seconds: 10), () {
+        if (_currentPosition == null) {
+          showFlutterToast("Current position is not available.");
+        }
+      });
       List<Placemark> placemark = await placemarkFromCoordinates(
         _currentPosition!.latitude,
         _currentPosition!.longitude,
@@ -91,6 +92,8 @@ class _SafehomeState extends State<Safehome> {
   void initState() {
     super.initState();
     _getcurrentlocation();
+    _getpermission();
+    _getaddresslocation();
   }
 
   void showModelissafe(BuildContext context) {
