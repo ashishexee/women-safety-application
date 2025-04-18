@@ -3,7 +3,7 @@ import 'package:woman_safety_app/child/bottom_pages.dart/add_contacts.dart';
 import 'package:woman_safety_app/child/bottom_pages.dart/chat_page.dart';
 import 'package:woman_safety_app/child/bottom_pages.dart/home_screen.dart';
 import 'package:woman_safety_app/child/bottom_pages.dart/profile_page.dart';
-import 'package:woman_safety_app/child/bottom_pages.dart/ratings_page.dart';
+import 'package:woman_safety_app/child/bottom_pages.dart/reviews_page.dart';
 import 'package:woman_safety_app/constants/constants.dart';
 
 class BottomPage extends StatefulWidget {
