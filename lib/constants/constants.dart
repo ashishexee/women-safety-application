@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 const themecolor = Color(0xFFfc4572);
+const themecolor2 = LinearGradient(
+  colors: [Colors.red, Colors.orange],
+);
 void gotopush(BuildContext context, Widget nextscreen) {
   Navigator.push(context, MaterialPageRoute(builder: (context) => nextscreen));
 }
