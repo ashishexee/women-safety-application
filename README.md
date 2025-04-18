@@ -38,7 +38,7 @@ A comprehensive Flutter application designed to enhance personal safety, provide
 
 ---
 ## Screenshots
-<img src="assets/screenshots/loginpage.jpg" width="200"/> <img src="screenshots/registerchild.jpg" width="200"/><img src="screenshots/registerparent.jpg" width="200"/><img src="screenshots/forgotpassword.jpg" width="200"/><img src="screenshots/childhomepage.jpg" width="200"/><img src="screenshots/contactpage.jpg" width="200"/><img src="screenshots/reviewpage.jpg" width="200"/><img src="screenshots/profilepage.jpg" width="200"/>
+<img src="assets/screenshots/loginpage.jpg" width="200"/> <img src="assets/screenshots/registerchild.jpg" width="200"/><img src="assets/screenshots/registerparent.jpg" width="200"/><img src="assts/screenshots/forgotpassword.jpg" width="200"/><img src="assets/screenshots/childhomepage.jpg" width="200"/><img src="assets/screenshots/contactpage.jpg" width="200"/><img src="assets/screenshots/reviewpage.jpg" width="200"/><img src="assets/screenshots/profilepage.jpg" width="200"/>
 
 ---
 ## Features Overview
